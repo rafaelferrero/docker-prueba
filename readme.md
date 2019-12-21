@@ -18,6 +18,13 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io
 sudo docker run hello-world
 ```
 
+# Install Compose
+```
+sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+```
+
 # Install Django and create a little project
 There are several tutorial for this, we use virtualenv and Pycharm as IDE for this but you can use what ever you want.
 ```
@@ -28,10 +35,18 @@ sudo apt-get install git
 and create a project with Pycharm, using a virtual environment and indicate use Python3.6 that originally came with Ubuntu and use
 Git to manage versions. 
 * In Pycharm Terminal Console, install Django and GUnicorn using PIP, freeze the pip installation and create a Django Project. Test it!.
+* For now I'll use plain pip and requirements.txt file.
 ```
 pip install django
 pip install gunicorn
 pip freeze > requirements.txt
 django-admin startproject djdocker
 gunicorn --chdir djdocker --bind :8000 djdocker.wsgi:application
+```
+
+# Create a Dockerfile
+* Create a Dockerfile and Build and Test docker!!
+```
+sudo docker build . -t djdocker
+sudo docker run -p 8000:8000 djdocker
 ```
