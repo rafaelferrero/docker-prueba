@@ -6,8 +6,13 @@ services:
     build: .
     volumes:
       - .:/opt/services/djdocker/src
+      - static_volume:/opt/services/djdocker/static
+      - media_volume:/opt/services/djdocker/media
     networks:
       - nginx_network
+      - database1_network
+    depends_on:
+      - database1
 
   nginx:
     image: nginx:1.13
@@ -15,11 +20,29 @@ services:
       - 8000:80
     volumes:
       - ./config/nginx/conf.d:/etc/nginx/conf.d
+      - static_volume:/opt/services/djdocker/static
+      - media_volume:/opt/services/djdocker/media
     depends_on:
       - djdocker
     networks:
       - nginx_network
 
+  database1:  # <-- IMPORTANT: same name as in DATABASES setting, otherwise Django won't find the database!
+    image: postgres:10
+    env_file:
+      - config/postgresql/database_env
+    networks:
+      - database1_network
+    volumes:
+      - database1_volume:/var/lib/postgresql/data
+
 networks:
   nginx_network:
     driver: bridge
+  database1_network:
+    driver: bridge
+
+volumes:
+  database1_volume:
+  static_volume:
+  media_volume:
