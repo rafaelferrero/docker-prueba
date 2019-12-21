@@ -17,3 +17,21 @@ sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 sudo docker run hello-world
 ```
+
+# Install Django and create a little project
+There are several tutorial for this, we use virtualenv and Pycharm as IDE for this but you can use what ever you want.
+```
+sudo apt-get install virtualenv
+sudo apt-get install git
+```
+* Then install Pycharm Community version from his [web](https://www.jetbrains.com/es-es/pycharm/download/#section=linux)
+and create a project with Pycharm, using a virtual environment and indicate use Python3.6 that originally came with Ubuntu and use
+Git to manage versions. 
+* In Pycharm Terminal Console, install Django and GUnicorn using PIP, freeze the pip installation and create a Django Project. Test it!.
+```
+pip install django
+pip install gunicorn
+pip freeze > requirements.txt
+django-admin startproject djdocker
+gunicorn --chdir djdocker --bind :8000 djdocker.wsgi:application
+```
