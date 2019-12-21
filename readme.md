@@ -61,3 +61,5 @@ sudo docker-compose run --rm djdocker /bin/bash -c "./djdocker/manage.py migrate
 sudo docker-compose run djdocker ./djdocker/manage.py collectstatic --no-input
 sudo docker-compose up
 ```
+
+Now we have to learn how to manage secrets!!
