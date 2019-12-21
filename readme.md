@@ -35,7 +35,7 @@ sudo apt-get install git
 and create a project with Pycharm, using a virtual environment and indicate use Python3.6 that originally came with Ubuntu and use
 Git to manage versions. 
 * In Pycharm Terminal Console, install Django and GUnicorn using PIP, freeze the pip installation and create a Django Project. Test it!.
-* For now I'll use plain pip and requirements.txt file.
+* For now I'll use plain pip and requirements.txt file. I don't feel confortable with Pipenv
 ```
 pip install django
 pip install gunicorn
@@ -44,9 +44,8 @@ django-admin startproject djdocker
 gunicorn --chdir djdocker --bind :8000 djdocker.wsgi:application
 ```
 
-# Create a Dockerfile
-* Create a Dockerfile and Build and Test docker!!
+# Create a Dockerfile and a Compose file too for use with Nginx
+* Create a Dockerfile, docker-compose.yml and Build and Test docker!!
 ```
-sudo docker build . -t djdocker
-sudo docker run -p 8000:8000 djdocker
+sudo docker-compose up
 ```
